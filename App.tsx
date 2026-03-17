@@ -27,6 +27,8 @@ import {
   Scissors,
   ShieldCheck,
   MoonStar,
+  Moon,
+  Mail,
   Heart,
   Camera,
   Move3d,
@@ -47,7 +49,8 @@ import {
   MessageCircle,
   ExternalLink,
   KeyRound,
-  CheckCircle2
+  CheckCircle2,
+  Star
 } from 'lucide-react';
 import Home from './components/Home';
 import ImageTransformer from './components/ImageTransformer';
@@ -65,9 +68,21 @@ import ChangeAngleStudio from './components/ChangeAngleStudio';
 import GraduationStudio from './components/GraduationStudio';
 import MockupStudio from './components/MockupStudio';
 import FashionStudio from './components/FashionStudio';
+import FamilyStudio from './components/FamilyStudio';
+import EidCards from './components/EidCards';
+import MuslimFashion from './components/MuslimFashion';
 import { Tab } from './types';
 
 export const NAV_CONFIG = [
+  {
+    group: "Edisi Ramadhan",
+    items: [
+      { id: 'ramadhan-studio', label: 'Keluarga Ramadhan', icon: Users, color: 'bg-emerald-600', text: 'text-emerald-400', desc: 'Foto keluarga tema lebaran' },
+      { id: 'eid-cards', label: 'Kartu Ucapan', icon: Mail, color: 'bg-amber-500', text: 'text-amber-400', desc: 'Bikin kartu lebaran unik' },
+      { id: 'muslim-fashion', label: 'Fashion Muslim', icon: Shirt, color: 'bg-indigo-600', text: 'text-indigo-400', desc: 'Katalog baju koko & hijab' },
+      { id: 'hajj-umrah', label: 'Haji & Umrah', icon: MoonStar, color: 'bg-emerald-600', text: 'text-emerald-400', desc: 'Foto tema Tanah Suci' },
+    ]
+  },
   {
     group: "Bisnis & Sistem",
     items: [
@@ -94,7 +109,6 @@ export const NAV_CONFIG = [
       { id: 'barbershop', label: 'Coba Rambut', icon: Scissors, color: 'bg-lime-600', text: 'text-lime-400', desc: 'Gaya rambut baru AI' },
       { id: 'graduation-studio', label: 'Foto Wisuda', icon: GraduationCap, color: 'bg-blue-500', text: 'text-blue-400', desc: 'Foto wisuda estetik' },
       { id: 'color-swapper', label: 'Ganti Warna Pakaian', icon: Palette, color: 'bg-pink-600', text: 'text-pink-400', desc: 'Ganti warna baju instan' },
-      { id: 'hajj-umrah', label: 'Haji & Umrah', icon: MoonStar, color: 'bg-emerald-600', text: 'text-emerald-400', desc: 'Foto tema Tanah Suci' },
       { id: 'product-photo', label: 'Studio Produk', icon: ShoppingBag, color: 'bg-emerald-600', text: 'text-amber-400', desc: 'Foto jualan profesional' },
     ]
   }
@@ -152,7 +166,18 @@ export default function App() {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-100 flex flex-col md:flex-row font-inter selection:bg-indigo-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-[#022c22] text-slate-100 flex flex-col md:flex-row font-jakarta selection:bg-emerald-500/30 overflow-x-hidden bg-ramadhan-pattern">
+      {/* Ramadhan Decorations */}
+      <div className="fixed top-10 right-10 pointer-events-none opacity-20 animate-float hidden lg:block">
+        <Moon className="w-32 h-32 text-amber-400 fill-amber-400/20" />
+      </div>
+      <div className="fixed bottom-20 left-10 pointer-events-none opacity-10 animate-pulse hidden lg:block">
+        <Star className="w-16 h-16 text-amber-200" />
+      </div>
+      <div className="fixed top-40 left-20 pointer-events-none opacity-10 animate-float hidden lg:block" style={{ animationDelay: '1s' }}>
+        <Star className="w-8 h-8 text-amber-200" />
+      </div>
+
       {/* Image Preview Overlay */}
       {previewImage && (
         <div 
@@ -172,11 +197,11 @@ export default function App() {
 
       {/* Desktop Sidebar */}
       <aside 
-        className={`hidden md:flex flex-col border-r border-white/[0.05] bg-[#070b15]/60 backdrop-blur-3xl sticky top-0 h-screen transition-all duration-500 ease-in-out z-50 ${isSidebarCollapsed ? 'w-[80px]' : 'w-[280px]'}`}
+        className={`hidden md:flex flex-col border-r border-white/[0.05] bg-[#064e3b]/60 backdrop-blur-3xl sticky top-0 h-screen transition-all duration-500 ease-in-out z-50 ${isSidebarCollapsed ? 'w-[80px]' : 'w-[280px]'}`}
       >
         <button 
           onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-          className="absolute -right-3 top-10 bg-indigo-600 text-white p-1.5 rounded-full border-4 border-[#030712] hover:bg-indigo-500 transition-all z-50"
+          className="absolute -right-3 top-10 bg-emerald-600 text-white p-1.5 rounded-full border-4 border-[#022c22] hover:bg-emerald-500 transition-all z-50"
         >
           {isSidebarCollapsed ? <PanelLeftOpen className="w-3.5 h-3.5" /> : <PanelLeftClose className="w-3.5 h-3.5" />}
         </button>
@@ -187,15 +212,15 @@ export default function App() {
             className="flex items-center gap-3 mb-6 cursor-pointer group"
           >
             <div className="relative shrink-0">
-              <div className="absolute inset-0 bg-indigo-500 blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
-              <div className="relative bg-gradient-to-br from-indigo-500 to-indigo-700 p-2 rounded-xl shadow-xl">
+              <div className="absolute inset-0 bg-emerald-500 blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
+              <div className="relative bg-gradient-to-br from-emerald-500 to-emerald-700 p-2 rounded-xl shadow-xl">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
             </div>
             {!isSidebarCollapsed && (
               <div>
                 <h1 className="text-lg font-black tracking-tighter text-white">BAMZ FUSION</h1>
-                <span className="text-[8px] text-slate-500 font-bold uppercase tracking-widest block -mt-1 text-nowrap">Creative AI Studio</span>
+                <span className="text-[8px] text-emerald-500 font-bold uppercase tracking-widest block -mt-1 text-nowrap">Ramadhan Edition</span>
               </div>
             )}
           </div>
@@ -228,11 +253,11 @@ export default function App() {
                   onClick={() => navigateTo(item.id as Tab)}
                   className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 w-full ${
                     activeTab === item.id 
-                    ? 'bg-indigo-600/10 text-indigo-400 border border-indigo-500/20 shadow-lg' 
+                    ? 'bg-emerald-600/10 text-emerald-400 border border-emerald-500/20 shadow-lg' 
                     : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]'
                   }`}
                 >
-                  <item.icon className={`w-4.5 h-4.5 shrink-0 ${activeTab === item.id ? 'text-indigo-400' : 'text-slate-500 group-hover:text-slate-300'}`} />
+                  <item.icon className={`w-4.5 h-4.5 shrink-0 ${activeTab === item.id ? 'text-emerald-400' : 'text-slate-500 group-hover:text-slate-300'}`} />
                   {!isSidebarCollapsed && (
                     <span className={`text-[12px] tracking-tight ${activeTab === item.id ? 'font-bold' : 'font-medium'}`}>
                       {item.label}
@@ -247,7 +272,7 @@ export default function App() {
         <div className="mt-auto p-3 border-t border-white/[0.05] bg-black/20">
             <button 
               onClick={() => navigateTo('settings')}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all w-full ${activeTab === 'settings' ? 'bg-indigo-600/10 text-indigo-400 border border-indigo-500/10' : 'text-slate-400 hover:bg-white/[0.03]'}`}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all w-full ${activeTab === 'settings' ? 'bg-emerald-600/10 text-emerald-400 border border-emerald-500/10' : 'text-slate-400 hover:bg-white/[0.03]'}`}
             >
               <Settings className="w-4.5 h-4.5" />
               {!isSidebarCollapsed && <span className="text-[12px] font-bold">Pengaturan</span>}
@@ -256,9 +281,9 @@ export default function App() {
       </aside>
 
       {/* Mobile Header */}
-      <header className="md:hidden sticky top-0 z-50 bg-[#030712]/95 backdrop-blur-xl border-b border-white/[0.05] px-4 py-3 flex items-center justify-between">
+      <header className="md:hidden sticky top-0 z-50 bg-[#022c22]/95 backdrop-blur-xl border-b border-white/[0.05] px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2" onClick={() => navigateTo('home')}>
-          <div className="bg-indigo-600 p-2 rounded-lg shadow-lg">
+          <div className="bg-emerald-600 p-2 rounded-lg shadow-lg">
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <span className="font-black text-sm tracking-tighter uppercase">BAMZ FUSION</span>
@@ -273,11 +298,11 @@ export default function App() {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] bg-[#030712] flex flex-col animate-in slide-in-from-bottom-6 duration-300">
-          <div className="p-4 border-b border-white/[0.05] flex items-center justify-between bg-[#070b15]">
+        <div className="fixed inset-0 z-[60] bg-[#022c22] flex flex-col animate-in slide-in-from-bottom-6 duration-300">
+          <div className="p-4 border-b border-white/[0.05] flex items-center justify-between bg-[#064e3b]">
             <div className="flex items-center gap-2">
-              <div className="bg-indigo-600/20 p-2 rounded-lg">
-                <Sparkles className="w-6 h-6 text-indigo-500" />
+              <div className="bg-emerald-600/20 p-2 rounded-lg">
+                <Sparkles className="w-6 h-6 text-emerald-500" />
               </div>
               <span className="font-black text-xl tracking-tighter uppercase">STUDIO TOOLS</span>
             </div>
@@ -312,11 +337,11 @@ export default function App() {
                         onClick={() => navigateTo(item.id as Tab)}
                         className={`flex flex-col items-center justify-center p-4 md:p-5 rounded-[1.5rem] border transition-all text-center gap-2 md:gap-3 active:scale-95 ${
                           activeTab === item.id 
-                          ? 'bg-indigo-600/10 border-indigo-500/40 text-indigo-400 shadow-[0_10px_20px_rgba(79,70,229,0.1)]' 
+                          ? 'bg-emerald-600/10 border-emerald-500/40 text-emerald-400 shadow-[0_10px_20px_rgba(16,185,129,0.1)]' 
                           : 'bg-white/[0.03] border-white/[0.05] text-slate-300'
                         }`}
                       >
-                        <div className={`p-2.5 md:p-3 rounded-2xl shadow-lg transition-transform ${activeTab === item.id ? 'bg-indigo-600 text-white' : 'bg-slate-800/80 group-hover:scale-110'}`}>
+                        <div className={`p-2.5 md:p-3 rounded-2xl shadow-lg transition-transform ${activeTab === item.id ? 'bg-emerald-600 text-white' : 'bg-slate-800/80 group-hover:scale-110'}`}>
                           <item.icon className="w-5 h-5 md:w-6 md:h-6" />
                         </div>
                         <div className="text-[10px] md:text-xs font-black leading-tight uppercase tracking-tight line-clamp-1">{item.label}</div>
@@ -332,7 +357,7 @@ export default function App() {
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-h-screen overflow-x-hidden">
         {activeTab !== 'home' && activeItem && (
-          <header className="sticky top-[56px] md:top-0 z-40 bg-[#030712]/90 backdrop-blur-xl border-b border-white/[0.05] px-4 md:px-8 py-3 md:py-4 flex items-center justify-between">
+          <header className="sticky top-[56px] md:top-0 z-40 bg-[#022c22]/90 backdrop-blur-xl border-b border-white/[0.05] px-4 md:px-8 py-3 md:py-4 flex items-center justify-between">
             <div className="flex items-center gap-3 md:gap-4 overflow-hidden">
                <button 
                 onClick={() => navigateTo('home')}
@@ -378,14 +403,17 @@ export default function App() {
             {activeTab === 'mockup-studio' && <MockupStudio onPreview={setPreviewImage} />}
             {activeTab === 'fashion-studio' && <FashionStudio onPreview={setPreviewImage} />}
             {activeTab === 'kids-studio' && <KidsStudio onPreview={setPreviewImage} />}
+            {activeTab === 'ramadhan-studio' && <FamilyStudio onPreview={setPreviewImage} />}
+            {activeTab === 'eid-cards' && <EidCards onPreview={setPreviewImage} />}
+            {activeTab === 'muslim-fashion' && <MuslimFashion onPreview={setPreviewImage} />}
             
             {activeTab === 'settings' && (
               <div className="max-w-4xl mx-auto space-y-12 pb-24">
                 <div className="flex flex-col items-center justify-center text-center space-y-8 animate-in zoom-in duration-500">
                   <div className="relative w-full max-w-lg">
-                    <div className="absolute inset-0 bg-indigo-500 blur-3xl opacity-10 scale-150" />
+                    <div className="absolute inset-0 bg-emerald-500 blur-3xl opacity-10 scale-150" />
                     <div className="relative bg-slate-900/60 p-8 md:p-16 rounded-[2.5rem] md:rounded-[3rem] border border-white/10 shadow-2xl space-y-6">
-                      <div className={`w-16 h-16 md:w-24 md:h-24 rounded-[1.5rem] md:rounded-[2rem] flex items-center justify-center mx-auto shadow-2xl transition-all duration-700 ${isConnected ? 'bg-gradient-to-br from-indigo-500 to-purple-600 rotate-6' : 'bg-slate-800'}`}>
+                      <div className={`w-16 h-16 md:w-24 md:h-24 rounded-[1.5rem] md:rounded-[2rem] flex items-center justify-center mx-auto shadow-2xl transition-all duration-700 ${isConnected ? 'bg-gradient-to-br from-emerald-500 to-amber-600 rotate-6' : 'bg-slate-800'}`}>
                         <ShieldCheck className={`w-8 h-8 md:w-12 md:h-12 ${isConnected ? 'text-white' : 'text-slate-600'}`} />
                       </div>
                       <div>
@@ -403,7 +431,7 @@ export default function App() {
                         // @ts-ignore
                         if (window.aistudio) await window.aistudio.openSelectKey();
                       }}
-                      className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-4 md:py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all shadow-xl shadow-indigo-600/20 flex items-center justify-center gap-3 border border-white/10 active:scale-95"
+                      className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 md:py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all shadow-xl shadow-emerald-600/20 flex items-center justify-center gap-3 border border-white/10 active:scale-95"
                     >
                       <Settings className="w-5 h-5" /> {isConnected ? 'Ubah API Key' : 'Hubungkan API Key'}
                     </button>
@@ -413,7 +441,7 @@ export default function App() {
                 {/* Tutorial Section */}
                 <section className="bg-slate-900/40 border border-white/5 rounded-[2.5rem] p-8 md:p-12 space-y-10 animate-in slide-in-from-bottom-8 duration-700">
                   <div className="text-center space-y-2">
-                    <h3 className="text-xs font-black text-indigo-400 uppercase tracking-[0.3em]">Panduan Aktivasi</h3>
+                    <h3 className="text-xs font-black text-emerald-400 uppercase tracking-[0.3em]">Panduan Aktivasi</h3>
                     <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Cara Mendapatkan API Key Gratis</h4>
                   </div>
                   
@@ -446,8 +474,8 @@ export default function App() {
                     ].map((item, i) => (
                       <div key={i} className="bg-white/5 p-6 rounded-[2rem] border border-white/5 flex gap-5 group hover:bg-white/[0.08] transition-colors">
                         <div className="shrink-0">
-                          <div className="w-12 h-12 bg-indigo-600/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <item.icon className="w-6 h-6 text-indigo-500" />
+                          <div className="w-12 h-12 bg-emerald-600/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <item.icon className="w-6 h-6 text-emerald-500" />
                           </div>
                         </div>
                         <div>
@@ -477,12 +505,12 @@ export default function App() {
           </div>
 
           {/* Global Footer */}
-          <footer className="mt-auto border-t border-white/[0.05] bg-[#070b15]/80 backdrop-blur-2xl p-8 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-indigo-500/5 pointer-events-none" />
+          <footer className="mt-auto border-t border-white/[0.05] bg-[#064e3b]/80 backdrop-blur-2xl p-8 text-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-emerald-500/5 pointer-events-none" />
             <div className="relative z-10 max-w-4xl mx-auto space-y-6">
                <div className="flex flex-col items-center gap-2">
                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">© 2025 BAMZ FUSION STUDIO • Powered by Gemini AI</p>
-                 <div className="h-1 w-8 bg-indigo-500/20 rounded-full" />
+                 <div className="h-1 w-8 bg-emerald-500/20 rounded-full" />
                </div>
                
                <div className="flex flex-col items-center gap-4">
